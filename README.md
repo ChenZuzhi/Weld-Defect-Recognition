@@ -1,1 +1,3 @@
-# Weld-Defect-Recognition
+# 基于迁移学习的焊缝缺陷识别
+
+##介绍
