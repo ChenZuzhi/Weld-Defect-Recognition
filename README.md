@@ -80,3 +80,54 @@ python retrain.py --image_dir /home/sjtu/Desktop/weld_defect/retraining_img/retr
 python retrain.py --image_dir /home/sjtu/Desktop/weld_defect/retraining_img/retraining_all_2000 --architecture mobilenet_1.0_224
 ```
 之后的操作与训练inception_v3类似。
+
+
+## 5.预测焊缝缺陷
+
+现在我们已经把模型准备好了，接下去就可以看看预测的效果怎么样了。
+
+你可以一次测试一张图片，也可以一次测试多张图片，将你要测试的图片全部整理到一个文件夹中，文件夹的名字随意(只能包含英文，数字，下划线)，这个文件夹名字之后需要用到。
+
+然后将这个文件夹放在/home/sjtu/Desktop/weld_defect/Test_Img中，这样的话Test_Img文件夹中就会有一个名字为'你取的文件夹名字'的文件夹。
+
+然后，我们打开主程序，也就是图片的接口程序，这个程序放在/home/sjtu/Desktop/weld_defect/predict中，打开Detect_Image_Test.py。
+
+将version变量中的值改为你的文件夹名，也就是说把第20行改为
+
+```
+version=['你取的文件夹名字']
+```
+
+然后运行Detect_Image_Test.py文件即可，预测时会输出每一张图片的信息。
+
+预测好的图片会被保存在/home/sjtu/Desktop/weld_defect/Final_Img/你取的文件夹名字 中。
+
+
+此外，你可以一次预测多个文件夹中的图片，比如你有一些'BURNTHROUGH'类型的图片和一些'CRACK'类型的图片需要预测，你可以把它们分别整理到
+
+```
+/home/sjtu/Desktop/weld_defect/Test_Img/BURNTHROUGH
+/home/sjtu/Desktop/weld_defect/Test_Img/CRACK
+```
+
+然后改变Detect_Image_Test.py中的version为：
+
+```
+version=['BURNTHROUGH','CRACK']
+```
+
+然后运行即可。
+
+
+
+## 6.一些有用的工具文件
+
+Tools文件夹中包含了一些有用的工具文件，比如：
+
+* ``Mixed_Up_Img.py``: 这个文件可以将指定文件夹中的图片全部打乱顺序并且重新命名。
+
+* ``Simply_Resize.py``: 这个文件可以将指定文件夹中的所有图片从原始大小转为另外一个大小,比如原来都是128*128像素，可以全部转换为32*32像素。
+
+* ``Simply_Rename.py``: 这个文件可以将指定文件夹中的所有图片重命名，新的名字为编号，顺序从1到n,n为图片数目。
+
+这些文件都比较简单，自己重新写也可以。
